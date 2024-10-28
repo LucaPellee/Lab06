@@ -30,19 +30,22 @@ class View(ft.UserControl):
         self._ddAnno = ft.Dropdown(
             label="anno",
             width= 300,
-            hint_text = "selezionare filtro anno"
+            hint_text = "selezionare filtro anno",
+            on_change= self._controller.leggiddAnno
         )
 
         self._ddBrand = ft.Dropdown(
             label = "brand",
             width= 300,
-            hint_text = "selezionare filtro brand"
+            hint_text = "selezionare filtro brand",
+            on_change= self._controller.leggiddBrand
         )
 
         self._ddRetailer = ft.Dropdown(
             label = "retailer",
             width = 500,
-            hint_text = "selezionare filtro retailer"
+            hint_text = "selezionare filtro retailer",
+            on_click= self._controller.read_retailer
         )
 
         row1 = ft.Row([self._ddAnno, self._ddBrand, self._ddRetailer], alignment= ft.MainAxisAlignment.CENTER)
@@ -51,9 +54,9 @@ class View(ft.UserControl):
         self._controller.riempi_ddBrand()
         self._controller.riempi_ddRetailer()
         #ROW 2
-        self._btnTop = ft.ElevatedButton(text="Top vendite")
+        self._btnTop = ft.ElevatedButton(text="Top vendite", on_click= self._controller.getTopVend)
 
-        self._btnAnalisi = ft.ElevatedButton(text = "Analizza vendite")
+        self._btnAnalisi = ft.ElevatedButton(text = "Analizza vendite", on_click= self._controller.getAnalisi)
 
         row2 = ft.Row([self._btnTop, self._btnAnalisi], alignment= ft.MainAxisAlignment.CENTER)
 

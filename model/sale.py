@@ -16,3 +16,12 @@ class Sale:
 
     def __hash__(self):
         return hash((self.retailer_code, self.product_number, self.order_method_code))
+
+    def __post_init__(self):
+        self.ricavo: float = (self.unit_sale_price * self.quantity)
+
+    def __lt__(self, other):
+        return self.ricavo < other.ricavo
+
+    def __str__(self):
+        return f"Data: {self.date}; Ricavo: {self.ricavo}; Retailer: {self.retailer_code}; Product: {self.product_number}"

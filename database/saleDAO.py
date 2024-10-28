@@ -43,8 +43,10 @@ class SaleDAO:
                                    row["Unit_sale_price"]))
             cursor.close()
             cnx.close()
-            result.sort(reverse = True)
-            return result[0:5]
+            return result
         else:
             print("Errore nella connessione")
             return None
+
+    def getStatVend(self):
+        pass

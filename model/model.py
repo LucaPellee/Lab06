@@ -17,4 +17,21 @@ class Model:
         return self._retailers_dao.getRetailerDAO()
 
     def getTopVendite(self, anno, brand, retailer_code):
-        return self._sales_dao.getVendDAO(anno, brand, retailer_code)
+        listSale = self._sales_dao.getVendDAO(anno, brand, retailer_code)
+        listSale.sort(reverse = True)
+        return listSale[0:5]
+
+    def getAnalisi(self, anno, brand, retailer_code):
+        listSale = self._sales_dao.getVendDAO(anno, brand, retailer_code)
+        if len(listSale) == 0:
+            return 0, 0, 0, 0
+        else:
+            ricavi = 0
+            numR = set()
+            numP = set()
+            for sale in listSale:
+                ricavi += sale.ricavo
+                numR.add(sale.retailer_code)
+                numP.add(sale.product_number)
+            numV = len(listSale)
+            return ricavi, numV, len(numR), len(numP)

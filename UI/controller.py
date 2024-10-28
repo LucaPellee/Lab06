@@ -62,5 +62,15 @@ class Controller:
         self._view.update()
 
 
-    def getAnalisi(self):
-        pass
+    def getAnalisi(self, e):
+        self._view._lvResult.controls.clear()
+        ricavi, numV, numR, numP = self._model.getAnalisi(self._anno, self._brand, self._retailer_code)
+        if (ricavi, numV, numR, numP) == (0,0,0,0):
+            self._view._lvResult.controls.append(ft.Text("No risultati con questi filtri"))
+        else:
+            self._view._lvResult.controls.append(ft.Text("Statistiche vendite:"))
+            self._view._lvResult.controls.append(ft.Text(f"Giro d'affari: {ricavi}"))
+            self._view._lvResult.controls.append(ft.Text(f"Numero vendite: {numV}"))
+            self._view._lvResult.controls.append(ft.Text(f"Numero retailers coinvolti: {numR}"))
+            self._view._lvResult.controls.append(ft.Text(f"Numero prodotti coinvolti: {numP}"))
+        self._view.update()
